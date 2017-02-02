@@ -1,8 +1,8 @@
 FROM java:8-alpine
 
-ARG WATERFALL_BUILD=82
+ARG WATERFALL_BUILD=83
 ARG WATERFALL_URL=https://ci.destroystokyo.com/job/Waterfall/${WATERFALL_BUILD}/artifact/Waterfall-Proxy/bootstrap/target/Waterfall.jar
-ARG WATERFALL_SHA512=0b448be45b8e0ad204a9212b173ac0fd9b4c216f6745a5ff3425378d40b9e9e44be9abf98f9b8b89e9b7992b62158bd0cd0684ca98fc83f792c40eaae5984b4a
+ARG WATERFALL_SHA512=b7486a6020bc3a7d89b024512642c23359e21f2ea39f2f899ebf832792fa5bbe78c752ee010c07d3aacf4f0a64c811d6a6cd769d689efdc2cbbb2851febe27ed
 
 WORKDIR /data
 ADD "${WATERFALL_URL}" /srv/waterfall.jar
