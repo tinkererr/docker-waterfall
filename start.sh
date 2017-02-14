@@ -1,2 +1,2 @@
 #!/bin/sh
-exec java $JAVA_ARGS -jar /srv/waterfall.jar $WATERFALL_ARGS
+exec java $JAVA_ARGS -jar /srv/Waterfall.jar $WATERFALL_ARGS

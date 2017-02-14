@@ -1,13 +1,47 @@
 FROM openjdk:8-jre-alpine
 
-ARG WATERFALL_BUILD=101
-ARG WATERFALL_URL=https://ci.destroystokyo.com/job/Waterfall/${WATERFALL_BUILD}/artifact/Waterfall-Proxy/bootstrap/target/Waterfall.jar
-ARG WATERFALL_SHA512=bb660598254eea10af212a7cae72c5ca80b14f6a802356bbfba99aaa6223efce03ce1e028e9a9ef51b564931a4bf1b8c7d8f6e922f7a8404eebf7a1ee15034f9
+ARG WATERFALL_GIT_URL=https://github.com/WaterfallMC/Waterfall.git
+ARG WATERFALL_VERSION=32a7625f4f34ac03692d3ad14d8f6cefa388a300
 
-WORKDIR /data
-ADD "${WATERFALL_URL}" /srv/waterfall.jar
-RUN cd /srv &&\
-	chmod 444 /srv/waterfall.jar
+ARG MAVEN_VERSION=3.3.9
+
+ARG WATERFALL_WORKSPACE=/usr/src/waterfall
+
+# Dependencies that need to be permanently installed
+RUN apk add --no-cache \
+	libc6-compat
+
+# Building
+RUN \
+	apk add --no-cache --virtual .build-deps \
+		bash \
+		git \
+		openjdk8="${JAVA_ALPINE_VERSION}" \
+		&&\
+	\
+	wget "http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz" &&\
+	tar -zxvf apache-maven-$MAVEN_VERSION-bin.tar.gz &&\
+	rm apache-maven-$MAVEN_VERSION-bin.tar.gz && \
+	mv apache-maven-$MAVEN_VERSION /usr/lib/mvn &&\
+	export MAVEN_HOME="/usr/lib/mvn" &&\
+	export PATH="${PATH}:${MAVEN_HOME}/bin" &&\
+	\
+	git config --global user.email "root@docker" &&\
+	git config --global user.name "Docker Build" &&\
+	git clone --recursive \
+		"${WATERFALL_GIT_URL}" "${WATERFALL_WORKSPACE}" &&\
+	\
+	cd "${WATERFALL_WORKSPACE}" &&\
+	git checkout "${WATERFALL_VERSION}" &&\
+	./build.sh &&\
+	rm -f Waterfall-Proxy/bootstrap/target/original-* &&\
+	mkdir -vp /srv &&\
+	chmod -v 444 Waterfall-Proxy/bootstrap/target/*.jar &&\
+	mv -v Waterfall-Proxy/bootstrap/target/*.jar /srv &&\
+	\
+	cd /srv &&\
+	rm -rf "${WATERFALL_WORKSPACE}" "${MAVEN_HOME}" &&\
+	apk del .build-deps
 
 COPY start.sh /usr/local/bin/waterfall
 RUN chmod +x /usr/local/bin/waterfall
