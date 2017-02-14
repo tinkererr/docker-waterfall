@@ -1,4 +1,4 @@
-FROM java:8-alpine
+FROM openjdk:8-jre-alpine
 
 ARG WATERFALL_BUILD=101
 ARG WATERFALL_URL=https://ci.destroystokyo.com/job/Waterfall/${WATERFALL_BUILD}/artifact/Waterfall-Proxy/bootstrap/target/Waterfall.jar
