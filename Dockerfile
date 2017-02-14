@@ -9,7 +9,7 @@ ADD "${WATERFALL_URL}" /srv/waterfall.jar
 RUN cd /srv &&\
 	chmod 444 /srv/waterfall.jar
 
-ADD start.sh /usr/local/bin/waterfall
+COPY start.sh /usr/local/bin/waterfall
 RUN chmod +x /usr/local/bin/waterfall
 
 ENV JAVA_ARGS "-Xmx1G"
