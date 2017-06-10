@@ -9,7 +9,8 @@ ARG WATERFALL_WORKSPACE=/usr/src/waterfall
 
 # Dependencies that need to be permanently installed
 RUN apk add --no-cache \
-	libc6-compat
+	libc6-compat \
+	libcrypto1.0
 
 # Building
 RUN \
