@@ -6,7 +6,7 @@ This image includes the [Jenkins build of Waterfall](), "a drag and drop replace
 
 All available tags are always listed [in Docker Hub](https://hub.docker.com/r/icedream/waterfall/tags), the list below explains the maintained tags:
 
-- `latest`, `b115`: Latest version of Waterfall.
+- `latest`, `b116`: Latest version of Waterfall.
 
 Previous builds may also be available as tags in the format `b<number>`, for
 example `b75`.
