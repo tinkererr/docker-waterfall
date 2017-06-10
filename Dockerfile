@@ -1,16 +1,17 @@
 FROM openjdk:8-jre-alpine
 
-ARG WATERFALL_GIT_URL=https://github.com/WaterfallMC/Waterfall.git
-ARG WATERFALL_VERSION=cb4d5effb96d190c27e266f05888bba93edb6601
-
-ARG MAVEN_VERSION=3.3.9
-
-ARG WATERFALL_WORKSPACE=/usr/src/waterfall
-
 # Dependencies that need to be permanently installed
 RUN apk add --no-cache \
 	libc6-compat \
 	libcrypto1.0
+
+# Build args
+ARG MAVEN_VERSION=3.5.0
+
+ARG WATERFALL_WORKSPACE=/usr/src/waterfall
+
+ARG WATERFALL_GIT_URL=https://github.com/WaterfallMC/Waterfall.git
+ARG WATERFALL_VERSION=cb4d5effb96d190c27e266f05888bba93edb6601
 
 # Building
 RUN \
