@@ -1,7 +1,7 @@
 FROM openjdk:8-jre-alpine
 
 ARG WATERFALL_GIT_URL=https://github.com/WaterfallMC/Waterfall.git
-ARG WATERFALL_VERSION=b5ed82d599efafa515dd52428130836e59ef32b2
+ARG WATERFALL_VERSION=78a8edd2da8aacf7eceb53edaa8b5a3e161271ef
 
 ARG MAVEN_VERSION=3.3.9
 
