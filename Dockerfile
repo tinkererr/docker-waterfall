@@ -11,7 +11,7 @@ ARG MAVEN_VERSION=3.5.2
 ARG WATERFALL_WORKSPACE=/usr/src/waterfall
 
 ARG WATERFALL_GIT_URL=https://github.com/WaterfallMC/Waterfall.git
-ARG WATERFALL_VERSION=null
+ARG WATERFALL_VERSION=b5d048b57a7837cbb0a4801764ec5d4d698b8fa3
 
 # Building
 RUN \
