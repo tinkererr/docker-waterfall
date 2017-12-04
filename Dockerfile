@@ -30,11 +30,12 @@ RUN \
 	\
 	git config --global user.email "root@docker" &&\
 	git config --global user.name "Docker Build" &&\
-	git clone --recursive \
+	git clone \
 		"${WATERFALL_GIT_URL}" "${WATERFALL_WORKSPACE}" &&\
 	\
 	cd "${WATERFALL_WORKSPACE}" &&\
 	git checkout "${WATERFALL_VERSION}" &&\
+	git submodule update --init &&\
 	./build.sh &&\
 	rm -f Waterfall-Proxy/bootstrap/target/original-* &&\
 	mkdir -vp /srv &&\
