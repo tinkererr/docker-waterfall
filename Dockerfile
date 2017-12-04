@@ -6,7 +6,7 @@ RUN apk add --no-cache \
 	libcrypto1.0
 
 # Build args
-ARG MAVEN_VERSION=3.5.0
+ARG MAVEN_VERSION=3.5.2
 
 ARG WATERFALL_WORKSPACE=/usr/src/waterfall
 
