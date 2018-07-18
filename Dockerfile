@@ -11,7 +11,7 @@ ARG MAVEN_VERSION=3.5.2
 ARG WATERFALL_WORKSPACE=/usr/src/waterfall
 
 ARG WATERFALL_GIT_URL=https://github.com/WaterfallMC/Waterfall.git
-ARG WATERFALL_VERSION=42bc9c39a9cfdd338a0b55703b24d8bcad46cb28
+ARG WATERFALL_VERSION=3d4d1549269cc7b18b6bac2cdec6abd7eee73459
 
 # Building
 RUN \
@@ -49,7 +49,7 @@ RUN \
 COPY start.sh /usr/local/bin/waterfall
 RUN chmod +x /usr/local/bin/waterfall
 
-ENV JAVA_ARGS "-Xmx1G"
+ENV JAVA_ARGS "-Xmx256M"
 ENV WATERFALL_ARGS ""
 
 VOLUME "/data"
